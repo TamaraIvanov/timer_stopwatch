@@ -1,0 +1,144 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timer/StopWatch</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <div class="p20">
+        <div class="chooseFunction p20">
+            <button class="timer p5" type="button" onclick="timer()">Timer</button>
+            <button class="stopWatch p5" type="button" onclick="stopWatch()">StopWatch</button>
+        </div>
+
+        <div class="timer clearfix">
+            <div class="left"><input id="hours" type="text" value="1" /> :</div>
+            <div class="left"><input id="minutes" type="text" value="0" /> :</div>
+            <div class="left"><input id="seconds" type="text" value="0" /></div>
+        </div>
+        <div class="timerFunctions p20">
+            <button class="start p5" type="button" onclick="start()">Start</button>
+            <button class="stop p5" type="button" onclick="stop()">Stop</button>
+            <button class="reset p5" type="button" onclick="reset()">Reset</button>
+        </div>
+    </div>
+
+    <script src="jquery-3.1.1.js"></script>
+    <script type="text/javascript">
+
+        var interval;
+        var time;
+        var stopwatch = true;
+
+        function timer() {
+            stopwatch = false;
+            preStart();
+        }
+
+        function stopWatch() {
+            stopwatch = true;
+            preStart();
+        }
+
+        function preStart() {
+            clearInterval(interval);
+            start();
+        }
+
+        function stop() {
+            clearInterval(interval);
+        }
+
+        function reset() {
+            setTimerParams(setDefaultHour(), 0, 0);
+            clearInterval(interval);
+            start();
+        }
+
+        function start() {
+
+            time = getTimerParams();
+
+            interval = setInterval(function () {
+
+                if(stopwatch) {
+                    //stopwatch
+                    if(time.seconds === 59) {
+                        time.seconds = 0;
+
+                        if(time.minutes === 59) {
+                            time.minutes = 0;
+                            time.hours++;
+                        } else {
+                            time.minutes++;
+                        }
+                    } else {
+                        time.seconds++;
+                    }
+
+                //timer
+                } else {
+
+                    if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
+                        clearInterval(interval);
+                    } else {
+                        if (time.seconds === 0) {
+                            time.seconds = 59;
+
+                            if (time.minutes === 0) {
+                                time.minutes = 59;
+                                time.hours--;
+                            } else {
+                                time.minutes--;
+                            }
+
+                        } else {
+                            time.seconds--;
+                        }
+                    }
+                }
+
+                document.getElementById("seconds").value = digits(time.seconds);
+                document.getElementById("minutes").value = digits(time.minutes);
+                document.getElementById("hours").value = digits(time.hours);
+
+            }, 1000);
+        }
+
+        function digits(n) {
+
+            if(n > 9) {
+                return "" + n;
+            } else {
+                return "0" + n;
+            }
+        }
+
+        function setDefaultHour() {
+            var hour = 1;
+
+            if(stopwatch) {
+                hour = 0;
+            }
+            return hour;
+        }
+
+        function getTimerParams() {
+
+            return {
+                hours: parseInt(document.getElementById("hours").value),
+                minutes: parseInt(document.getElementById("minutes").value),
+                seconds: parseInt(document.getElementById("seconds").value)
+            }
+        }
+
+        function setTimerParams(hours, minutes, seconds) {
+
+            document.getElementById("seconds").value = digits(seconds);
+            document.getElementById("minutes").value = digits(minutes);
+            document.getElementById("hours").value = digits(hours);
+        }
+
+    </script>
+</body>
+</html>

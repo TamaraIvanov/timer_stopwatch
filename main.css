@@ -1,0 +1,101 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+ul {
+	list-style-type: none;
+}
+
+a, a:focus,
+button, button:focus,
+input, input {
+	outline: none;
+}
+.clearfix:before,
+.clearfix:after {
+	clear: both;
+	display: block;
+	content: '';
+}
+.left {
+	float: left;
+}
+
+.row {
+	width: 100%;
+}
+
+.row > * {
+	box-sizing: border-box;
+	padding: 0 15px;
+	float: left;
+}
+
+.col-1 {
+	width: 8.33%;
+}
+
+.col-2 {
+	width: 16.67%;
+}
+
+.col-3 {
+	width: 25%;
+}
+
+.col-4 {
+	width: 33.33%;
+}
+
+.col-5 {
+	width: 41.67%;
+}
+
+.col-6 {
+	width: 50%;
+}
+
+.col-7 {
+	width: 58.33%;
+}
+
+.col-8 {
+	width: 66.67%;
+}
+
+.col-9 {
+	width: 75%;
+}
+
+.col-10 {
+	width: 83.33%;
+}
+
+.col-11 {
+	width: 91.67%;
+}
+
+.col-12 {
+	width: 100%;
+}
+
+.p5 {
+	padding: 5px;
+}
+.p20 {
+	padding: 20px;
+}
+.timer label {
+	padding: 5px;
+}
+.timer input {
+	width:50px;
+	margin-left: 10px;
+}
